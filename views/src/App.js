@@ -1,9 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
+import UserBox from './components/UserBox';
+import './components/FontAwesomeIcons'
+import React from 'react';
 
 function App() {
   return (
-    <UserBox />
+    <React.StrictMode>
+      <UserBox />
+    </ React.StrictMode>
   );
 }
 
