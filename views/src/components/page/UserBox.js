@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import UserAdd from './UserAdd';
 import UserEdit from './UserEdit';
 import UserList from './UserList';
