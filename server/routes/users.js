@@ -19,6 +19,7 @@ router.post('/', async (req, res, next) => {
   try {
     const users = await models.User.create(req.body)
 
+    console.log(users)
     res.json(new Response(users))
   } catch (error) {
     console.log(error)

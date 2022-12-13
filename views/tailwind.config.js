@@ -7,8 +7,11 @@ module.exports = {
     extend: {
       colors: {
         'black-100': '#181D31'
+      },
+      padding: {
+        '26': '6.5rem'
       }
-    },
+    }
   },
   plugins: [],
 }
