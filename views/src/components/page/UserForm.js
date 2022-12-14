@@ -29,7 +29,7 @@ export default class UserForm extends Component {
 
     render() {
         return (
-            <div className=''>
+            <div className='container'>
                 <div className='bg-blue-500 rounded-lg px-4 py-1'>
                     <h1 className=' text-lg text-white font-bold'>Add Contact</h1>
                 </div>
