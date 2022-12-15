@@ -6,7 +6,12 @@ var { Response } = require('../helpers/util')
 /* GET users listing. */
 router.get('/', async (req, res, next) => {
   try {
-    const users = await models.User.findAll()
+    const users = await models.User.findAll({
+      order: [
+        ['name', 'ASC']
+      ]
+    })
+    const count = await models.User.count()
 
     res.json(new Response(users))
   } catch (error) {

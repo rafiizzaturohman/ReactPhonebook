@@ -9,7 +9,7 @@ module.exports = {
         'black-100': '#181D31'
       },
       padding: {
-        '26': '6.5rem'
+        '26': '6.2rem'
       }
     }
   },

@@ -2,6 +2,7 @@ import { Component } from 'react';
 import UserForm from './UserForm';
 import UserList from './UserList';
 import axios from 'axios';
+import UserSearch from './UserSearch';
 
 export default class UserBox extends Component {
     constructor(props) {
@@ -45,11 +46,11 @@ export default class UserBox extends Component {
         try {
             const { data } = await axios.put(`http://localhost:3002/users/${id}`, { name, phone })
 
-            if (data) {
+            if (data.success) {
                 this.setState((state) => ({
                     users: state.users.map(item => {
                         if (item.id === id) {
-                            return { ...data.data, sent: true }
+                            return { ...data.data }
                         }
                         return item
                     })
@@ -77,10 +78,12 @@ export default class UserBox extends Component {
     render() {
         return (
             <div>
-                <div className='grid gap-10 my-28 mx-24 md:grid-cols-none xl:grid-cols-2'>
+                <div className='grid gap-6 my-28 mx-20 md:grid-cols-none xl:grid-cols-2'>
                     <div>
                         <div className='shadow-2xl shadow-slate-300 bg-white/80 rounded-lg'>
-                            <div className='container py-26 px-32'>
+                            <div className='container py-26 px-24 space-y-10'>
+
+                                <UserSearch />
 
                                 <UserForm add={this.addContact} />
 

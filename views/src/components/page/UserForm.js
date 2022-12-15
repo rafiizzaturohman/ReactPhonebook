@@ -38,12 +38,12 @@ export default class UserForm extends Component {
                     <form onSubmit={this.handleSubmit} id='inputForm' className='space-y-8 mt-8'>
                         <div className='space-x-5 flex justify-evenly items-center'>
                             <label className='text-lg font-semibold tracking-wide' htmlFor='name'>Name</label>
-                            <input type='text' id='name' name='name' onChange={this.handleInputChange} value={this.state.name} className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' />
+                            <input type='text' id='name' name='name' onChange={this.handleInputChange} value={this.state.name} className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' required />
                         </div>
 
                         <div className='space-x-4 flex justify-evenly items-center'>
                             <label className='text-lg font-semibold tracking-wide' htmlFor='phone'>Phone</label>
-                            <input type='text' id='phone' name='phone' onChange={this.handleInputChange} value={this.state.phone} className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' />
+                            <input type='text' id='phone' name='phone' onChange={this.handleInputChange} value={this.state.phone} className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' required />
                         </div>
 
                         <div className='flex space-x-2'>
