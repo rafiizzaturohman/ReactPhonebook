@@ -105,7 +105,7 @@ export default class UserBox extends Component {
                     {/* CARD LIST START */}
                     <div className='m-4'>
                         <div className='bg-slate-300 px-8 py-1 rounded-md shadow-md'>
-                            <h1 className='text-3xl font-bold tracking-wide'>Contact App</h1>
+                            <h1 className='text-3xl font-bold tracking-wide'>Phonebook App</h1>
                         </div>
 
                         <div className='container py-6 mt-8'>
