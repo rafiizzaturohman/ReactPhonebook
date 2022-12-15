@@ -3,6 +3,7 @@ import { Component } from 'react';
 
 
 export default class UserItem extends Component {
+
     constructor(props) {
         super(props)
         this.state = {
@@ -22,7 +23,8 @@ export default class UserItem extends Component {
         });
     }
 
-    handleUpdate = () => {
+    handleUpdate = (event) => {
+        event.preventDefault()
         this.props.update(this.state.name, this.state.phone)
         this.setState({ editCond: false })
     }

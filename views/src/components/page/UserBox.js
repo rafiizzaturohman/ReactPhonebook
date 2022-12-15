@@ -2,7 +2,6 @@ import { Component } from 'react';
 import UserForm from './UserForm';
 import UserList from './UserList';
 import axios from 'axios';
-import UserSearch from './UserSearch';
 
 export default class UserBox extends Component {
     constructor(props) {
@@ -24,11 +23,13 @@ export default class UserBox extends Component {
 
     addContact = async (name, phone) => {
         try {
+            const id = Date.now()
             this.setState((state, props) => {
                 return {
                     users: [
                         ...state.users,
                         {
+                            id,
                             name,
                             phone
                         }
@@ -36,17 +37,9 @@ export default class UserBox extends Component {
                 }
             })
 
-            await axios.post('http://localhost:3002/users', { name, phone })
-        } catch (error) {
-            console.log(error)
-        }
-    }
+            const { data } = await axios.post('http://localhost:3002/users', { name, phone })
 
-    updateContact = async (id, name, phone) => {
-        try {
-            const { data } = await axios.put(`http://localhost:3002/users/${id}`, { name, phone })
-
-            if (data.success) {
+            if (data) {
                 this.setState((state) => ({
                     users: state.users.map(item => {
                         if (item.id === id) {
@@ -55,21 +48,41 @@ export default class UserBox extends Component {
                         return item
                     })
                 }))
-            } else {
-                console.log(data.data)
             }
         } catch (error) {
+            alert('Failed to add data')
+            console.log(error)
+        }
+    }
+
+    updateContact = async (id, name, phone) => {
+        try {
+            const { data } = await axios.put(`http://localhost:3002/users/${id}`, { name, phone })
+
+            if (data) {
+                this.setState((state) => ({
+                    users: state.users.map(item => {
+                        if (item.id === id) {
+                            return { ...data.data }
+                        }
+                        return item
+                    })
+                }))
+            }
+        } catch (error) {
+            alert('Failed to update data')
             console.log(error)
         }
     }
 
     deleteContact = async (id) => {
         try {
-            await axios.delete(`http://localhost:3002/users/${id}`)
             this.setState((state) => ({
                 users: state.users.filter((props) => props.id !== id)
-            }))
+            }));
+            await axios.delete(`http://localhost:3002/users/${id}`)
         } catch (error) {
+            alert('Failed to delete data')
             console.log(error)
         }
     }
@@ -80,26 +93,26 @@ export default class UserBox extends Component {
             <div>
                 <div className='grid gap-6 my-28 mx-20 md:grid-cols-none xl:grid-cols-2'>
                     <div>
+                        {/* CARD FORM START */}
                         <div className='shadow-2xl shadow-slate-300 bg-white/80 rounded-lg'>
                             <div className='container py-26 px-24 space-y-10'>
-
-                                <UserSearch />
-
                                 <UserForm add={this.addContact} />
-
                             </div>
                         </div>
                     </div>
+                    {/* CARD FORM END */}
 
+                    {/* CARD LIST START */}
                     <div className='m-4'>
-                        <div>
+                        <div className='bg-slate-300 px-8 py-1 rounded-md shadow-md'>
                             <h1 className='text-3xl font-bold tracking-wide'>Contact App</h1>
                         </div>
 
-                        <div className='container'>
+                        <div className='container py-6 mt-8'>
                             <UserList data={this.state.users} updateContact={this.updateContact} removeContact={this.deleteContact} />
                         </div>
                     </div>
+                    {/* CARD LIST END */}
                 </div>
             </div >
         )
