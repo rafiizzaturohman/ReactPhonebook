@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Component } from 'react';
 
 export default class UserForm extends Component {
-
     constructor(props) {
         super(props)
         this.state = {

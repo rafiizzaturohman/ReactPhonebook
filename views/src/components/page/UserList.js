@@ -1,8 +1,7 @@
+import React from "react";
 import UserItem from "./UserItem";
 
 export default function UserList(props) {
-    
-
     return (
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
             {
