@@ -11,7 +11,6 @@ router.get('/', async (req, res, next) => {
         ['name', 'ASC']
       ]
     })
-    const count = await models.User.count()
 
     res.json(new Response(users))
   } catch (error) {

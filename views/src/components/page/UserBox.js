@@ -11,8 +11,8 @@ export default class UserBox extends Component {
         }
     }
 
-    componentDidMount() {
-        axios.get('http://localhost:3002/users')
+    async componentDidMount() {
+        await axios.get('http://localhost:3002/users')
             .then((response) => {
                 const contacts = response.data.data
                 this.setState({ users: contacts })
@@ -28,11 +28,7 @@ export default class UserBox extends Component {
                 return {
                     users: [
                         ...state.users,
-                        {
-                            id,
-                            name,
-                            phone
-                        }
+                        { id, name, phone }
                     ]
                 }
             })
@@ -91,7 +87,7 @@ export default class UserBox extends Component {
     render() {
         return (
             <div>
-                <div className='grid gap-6 my-28 mx-20 md:grid-cols-none xl:grid-cols-2'>
+                <div className='grid gap-8 my-28 mx-20 md:grid-cols-none xl:grid-cols-2'>
                     <div>
                         {/* CARD FORM START */}
                         <div className='shadow-2xl shadow-slate-300 bg-white/80 rounded-lg'>
@@ -103,12 +99,12 @@ export default class UserBox extends Component {
                     {/* CARD FORM END */}
 
                     {/* CARD LIST START */}
-                    <div className='m-4'>
-                        <div className='bg-slate-300 px-8 py-1 rounded-md shadow-md'>
-                            <h1 className='text-3xl font-bold tracking-wide'>Phonebook App</h1>
+                    <div className=''>
+                        <div className='bg-gradient-to-tr from-blue-700 to-blue-500 px-8 py-1 rounded-md shadow-md'>
+                            <h1 className='text-3xl text-white font-bold tracking-wide'>Phonebook App</h1>
                         </div>
 
-                        <div className='container py-6 mt-8'>
+                        <div className='container py-6 px-2 mt-8 overscroll-y-contain max-h-screen'>
                             <UserList data={this.state.users} updateContact={this.updateContact} removeContact={this.deleteContact} />
                         </div>
                     </div>

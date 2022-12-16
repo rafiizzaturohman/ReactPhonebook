@@ -39,7 +39,7 @@ export default class UserForm extends Component {
     }
 
     render() {
-        if (this.state.addCond == false) {
+        if (this.state.addCond === false) {
             return (
                 <div>
                     {/* SEARCH START */}
@@ -57,7 +57,7 @@ export default class UserForm extends Component {
 
                                 <div className='space-x-4 flex justify-evenly items-center'>
                                     <label className='text-lg font-semibold tracking-wide' htmlFor='phone'>Phone</label>
-                                    <input type='text' id='phone' name='phone' className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' required />
+                                    <input type='tel' id='phone' name='phone' className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' required />
                                 </div>
                             </div>
                         </div>
@@ -67,7 +67,7 @@ export default class UserForm extends Component {
                     {/* BUTTON ADD START */}
                     <div className='container mt-10'>
                         <button type='button' onClick={this.handleChangeTrue} className='transition flex text-white bg-blue-500 hover:bg-blue-600 hover:delay-150 rounded-lg font-semibold items-center space-x-3 pr-6'>
-                            <div className='bg-blue-600 px-2 py-1 rounded-lg'>
+                            <div className='bg-blue-600 px-3 py-1 rounded-lg'>
                                 <FontAwesomeIcon icon='plus' />
                             </div>
                             <p>Add Contact</p>
@@ -116,8 +116,10 @@ export default class UserForm extends Component {
 
                                 <div className='space-x-4 flex justify-evenly items-center'>
                                     <label className='text-lg font-semibold tracking-wide' htmlFor='phone'>Phone</label>
-                                    <input type='text' id='phone' name='phone' onChange={this.handleInputChange} value={this.state.phone} className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' onInvalid={e => e.target.setCustomValidity('Please enter phone here')} onInput={e => e.target.setCustomValidity('')} required />
+                                    <input type='tel' pattern='[08][0-9]{11}' id='phone' name='phone' onChange={this.handleInputChange} value={this.state.phone} className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' onInvalid={e => e.target.setCustomValidity('Please enter phone here')} onInput={e => e.target.setCustomValidity('')} required />
                                 </div>
+
+                                <p className='tracking-wide opacity-70'>Phone format: 0812345678912</p>
 
                                 <div className='flex space-x-2'>
                                     <button type='submit' className='transition flex text-white bg-blue-500 hover:bg-blue-600 hover:delay-150 rounded-lg font-semibold items-center space-x-3 pr-6'>

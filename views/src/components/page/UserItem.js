@@ -52,7 +52,7 @@ export default class UserItem extends Component {
             )
         } else {
             return (
-                <div className='container shadow-2xl shadow-slate-300 bg-white/80 rounded-lg w-auto h-auto space-y-4 px-8 py-5  border-2 border-blue-200' >
+                <div className='transition ease-in-out container shadow-lg shadow-slate-300 bg-white/80 rounded-lg w-auto h-auto space-y-4 px-8 py-5  border-2 border-blue-200 hover:-translate-y-1 hover:scale-103' >
                     <div className='flex space-x-3 items-center'>
                         <FontAwesomeIcon icon='signature' />
                         <h1>{this.props.name}</h1>
