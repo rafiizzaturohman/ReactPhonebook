@@ -21,16 +21,6 @@ export default class UserForm extends Component {
         });
     }
 
-    handleChangeTrue = (event) => {
-        event.preventDefault()
-        this.setState({ addCond: true })
-    }
-
-    handleChangeFalse = (event) => {
-        event.preventDefault()
-        this.setState({ addCond: false })
-    }
-
     handleSubmit = (event) => {
         event.preventDefault()
         this.props.add(this.state.name, this.state.phone)
@@ -38,7 +28,7 @@ export default class UserForm extends Component {
     }
 
     render() {
-        if (this.state.addCond === false) {
+        if (this.state.addCond !== true) {
             return (
                 <div>
                     {/* SEARCH START */}
@@ -65,7 +55,7 @@ export default class UserForm extends Component {
 
                     {/* BUTTON ADD START */}
                     <div className='container mt-10'>
-                        <button type='button' onClick={this.handleChangeTrue} className='transition flex text-white bg-blue-500 hover:bg-blue-600 hover:delay-150 rounded-lg font-semibold items-center space-x-3 pr-6'>
+                        <button type='button' onClick={() => this.setState({ addCond: true })} className='transition flex text-white bg-blue-500 hover:bg-blue-600 hover:delay-150 rounded-lg font-semibold items-center space-x-3 pr-6'>
                             <div className='bg-blue-600 px-3 py-1 rounded-lg'>
                                 <FontAwesomeIcon icon='plus' />
                             </div>
@@ -128,7 +118,7 @@ export default class UserForm extends Component {
                                         <p>Add</p>
                                     </button>
 
-                                    <button type='button' onClick={this.handleChangeFalse} className='transition flex text-white bg-amber-500 hover:bg-amber-600 hover:delay-150 rounded-lg font-semibold items-center space-x-2 pr-3'>
+                                    <button type='button' onClick={() => this.setState({ addCond: false })} className='transition flex text-white bg-amber-500 hover:bg-amber-600 hover:delay-150 rounded-lg font-semibold items-center space-x-2 pr-3'>
                                         <div className='bg-amber-600 px-2 py-1 rounded-lg'>
                                             <FontAwesomeIcon icon='ban' />
                                         </div>
