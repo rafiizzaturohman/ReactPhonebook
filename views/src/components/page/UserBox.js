@@ -91,7 +91,7 @@ export default class UserBox extends Component {
                     <div>
                         {/* CARD FORM START */}
                         <div className='shadow-2xl shadow-slate-300 bg-white/80 rounded-lg'>
-                            <div className='container py-26 px-24 space-y-10'>
+                            <div className='container py-16 px-24 space-y-10'>
                                 <UserForm add={this.addContact} />
                             </div>
                         </div>

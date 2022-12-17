@@ -44,9 +44,9 @@ export default class UserItem extends Component {
                     </div>
 
                     <div className='flex justify-evenly py-2'>
-                        <button type='button' onClick={this.handleUpdate} className='transition hover:text-slate-400 hover:delay-150 font-semibold tracking-wider'>Update</button>
+                        <button type='button' onClick={this.handleUpdate} className='transition hover:text-slate-400 hover:delay-100 font-semibold tracking-wider'>Update</button>
 
-                        <button type='button' onClick={() => this.setState({ editCond: false })} className='transition hover:text-slate-400 hover:delay-150 font-semibold tracking-wider'>Cancel</button>
+                        <button type='button' onClick={() => this.setState({ editCond: false })} className='transition hover:text-slate-400 hover:delay-100 font-semibold tracking-wider'>Cancel</button>
                     </div>
                 </div>
             )
@@ -64,9 +64,9 @@ export default class UserItem extends Component {
                     </div>
 
                     <div className='flex justify-evenly py-2'>
-                        <button type='button' onClick={() => this.setState({ editCond: true })} className='transition hover:text-slate-400 hover:delay-150 font-semibold tracking-wider'>Edit</button>
+                        <button type='button' onClick={() => this.setState({ editCond: true })} className='transition hover:text-slate-400 hover:delay-100 font-semibold tracking-wider'>Edit</button>
 
-                        <button type='button' onClick={this.props.remove} className='transition hover:text-slate-400 hover:delay-150 font-semibold tracking-wider'>Delete</button>
+                        <button type='button' onClick={this.props.remove} className='transition hover:text-slate-400 hover:delay-100 font-semibold tracking-wider'>Delete</button>
                     </div>
                 </div>
             )

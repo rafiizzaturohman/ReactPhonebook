@@ -118,7 +118,7 @@ export default class UserForm extends Component {
                                     <input type='tel' pattern='[08][0-9]{11}' id='phone' name='phone' onChange={this.handleInputChange} value={this.state.phone} className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' onInvalid={e => e.target.setCustomValidity('Please enter phone here')} onInput={e => e.target.setCustomValidity('')} required />
                                 </div>
 
-                                <p className='tracking-wide opacity-70'>Phone format: 0812345678912</p>
+                                <p className='tracking-wide opacity-60'>Phone format: 0812345678912</p>
 
                                 <div className='flex space-x-2'>
                                     <button type='submit' className='transition flex text-white bg-blue-500 hover:bg-blue-600 hover:delay-150 rounded-lg font-semibold items-center space-x-3 pr-6'>
