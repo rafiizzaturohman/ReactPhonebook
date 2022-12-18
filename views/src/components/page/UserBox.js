@@ -85,8 +85,8 @@ export default class UserBox extends Component {
     }
 
     updateContact = async (id, name, phone) => {
+        const { data } = await axios.put(`http://localhost:3002/users/${id}`, { name, phone })
         try {
-            const { data } = await axios.put(`http://localhost:3002/users/${id}`, { name, phone })
 
             if (data.success) {
                 this.setState((state) => ({
@@ -99,7 +99,7 @@ export default class UserBox extends Component {
                 }))
             }
         } catch (error) {
-            alert('Failed to update data')
+            alert('Failed to update contact')
             console.log(error)
         }
     }
@@ -115,7 +115,6 @@ export default class UserBox extends Component {
             console.log(error)
         }
     }
-
 
     render() {
         return (
