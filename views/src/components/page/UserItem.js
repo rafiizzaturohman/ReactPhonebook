@@ -9,7 +9,8 @@ export default class UserItem extends Component {
         this.state = {
             editCond: false,
             name: props.name,
-            phone: props.phone
+            phone: props.phone,
+            sent: props.sent
         }
     }
 
@@ -66,7 +67,7 @@ export default class UserItem extends Component {
                     <div className='flex justify-evenly py-2'>
                         <button type='button' onClick={() => this.setState({ editCond: true })} className='transition hover:text-slate-400 hover:delay-100 font-semibold tracking-wider'>Edit</button>
 
-                        <button type='button' onClick={this.props.remove} className='transition hover:text-slate-400 hover:delay-100 font-semibold tracking-wider'>Delete</button>
+                        <button type='button' onClick={this.props.sent ? this.props.remove : this.props.resend} className='transition hover:text-slate-400 hover:delay-100 font-semibold tracking-wider'>{this.props.sent ? 'Delete' : 'Resend'}</button>
                     </div>
                 </div>
             )

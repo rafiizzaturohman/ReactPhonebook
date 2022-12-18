@@ -12,41 +12,74 @@ export default class UserBox extends Component {
     }
 
     async componentDidMount() {
-        await axios.get('http://localhost:3002/users')
-            .then((response) => {
-                const contacts = response.data.data
-                this.setState({ users: contacts })
-            }).catch((error) => {
-                console.log(error)
-            })
+        try {
+            const { data } = await axios.get('http://localhost:3002/users')
+            if (data.success) {
+                this.setState({
+                    users: data.data.map(item => {
+                        item.sent = true
+                        return item
+                    })
+                })
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     addContact = async (name, phone) => {
-        try {
-            const id = Date.now()
-            this.setState((state, props) => {
-                return {
-                    users: [
-                        ...state.users,
-                        { id, name, phone }
-                    ]
-                }
-            })
+        const id = Date.now()
+        this.setState((state, props) => {
+            return {
+                users: [
+                    ...state.users,
+                    { id, name, phone, sent: true }
+                ]
+            }
+        })
 
+        try {
             const { data } = await axios.post('http://localhost:3002/users', { name, phone })
 
-            if (data) {
+            if (data.success) {
                 this.setState((state) => ({
                     users: state.users.map(item => {
                         if (item.id === id) {
-                            return { ...data.data }
+                            return { ...data.data, sent: true }
                         }
                         return item
                     })
                 }))
             }
         } catch (error) {
-            alert('Failed to add data')
+            console.log(error)
+            this.setState((state) => ({
+                user: state.users.map(item => {
+                    if (item.id === id) {
+                        item.sent = false
+                    }
+                    return item
+                })
+            }))
+        }
+    }
+
+    resendContact = async (id, name, phone) => {
+        try {
+            const { data } = await axios.post(`http://localhost:3002/users`, { name, phone })
+
+            if (data.success) {
+                this.setState((state) => ({
+                    users: state.users.map(item => {
+                        if (item.id === id) {
+                            return { ...data.data, sent: true }
+                        }
+                        return item
+                    })
+                }))
+            }
+        } catch (error) {
+            alert('Failed to resend data')
             console.log(error)
         }
     }
@@ -55,11 +88,11 @@ export default class UserBox extends Component {
         try {
             const { data } = await axios.put(`http://localhost:3002/users/${id}`, { name, phone })
 
-            if (data) {
+            if (data.success) {
                 this.setState((state) => ({
                     users: state.users.map(item => {
                         if (item.id === id) {
-                            return { ...data.data }
+                            return { ...data.data, sent: true }
                         }
                         return item
                     })
@@ -105,7 +138,7 @@ export default class UserBox extends Component {
                         </div>
 
                         <div className='container py-6 px-2 mt-8 overscroll-y-contain max-h-screen'>
-                            <UserList data={this.state.users} updateContact={this.updateContact} removeContact={this.deleteContact} />
+                            <UserList data={this.state.users} updateContact={this.updateContact} removeContact={this.deleteContact} resendContact={this.resendContact} />
                         </div>
                     </div>
                     {/* CARD LIST END */}

@@ -9,6 +9,8 @@ export default class UserForm extends Component {
             name: '',
             phone: ''
         }
+        this.handleChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleInputChange = (event) => {
