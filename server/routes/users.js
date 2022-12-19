@@ -13,7 +13,8 @@ router.get('/', async (req, res, next) => {
       const users = await models.User.findAll({
         where: {
           [Op.and]: [
-            { name: name }
+            { name: name },
+            { phone: phone }
           ]
         },
         order: [
