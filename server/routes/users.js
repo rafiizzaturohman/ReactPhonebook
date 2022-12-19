@@ -13,8 +13,16 @@ router.get('/', async (req, res, next) => {
       const users = await models.User.findAll({
         where: {
           [Op.or]: [
-            { name: name },
-            { phone: phone }
+            {
+              name: {
+                [Op.iLike]: `%${name}%`
+              }
+            },
+            {
+              phone: {
+                [Op.iLike]: `%${phone}%`
+              }
+            }
           ]
         },
         order: [
@@ -28,7 +36,11 @@ router.get('/', async (req, res, next) => {
       const users = await models.User.findAll({
         where: {
           [Op.and]: [
-            { name: name }
+            {
+              name: {
+                [Op.iLike]: `%${name}%`
+              }
+            }
           ]
         },
         order: [
@@ -41,7 +53,11 @@ router.get('/', async (req, res, next) => {
       const users = await models.User.findAll({
         where: {
           [Op.and]: [
-            { phone: phone }
+            {
+              phone: {
+                [Op.iLike]: `%${phone}%`
+              }
+            }
           ]
         },
         order: [
@@ -51,7 +67,6 @@ router.get('/', async (req, res, next) => {
 
       res.json(new Response(users))
 
-
     } else {
       const users = await models.User.findAll({
         order: [
@@ -59,6 +74,7 @@ router.get('/', async (req, res, next) => {
         ]
       })
 
+      console.log('asu', users)
       res.json(new Response(users))
     }
   } catch (error) {

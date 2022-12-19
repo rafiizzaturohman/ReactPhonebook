@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Component } from 'react';
 import UserSearch from './UserSearch';
-import axios from 'axios';
 
 export default class UserForm extends Component {
     constructor(props) {
