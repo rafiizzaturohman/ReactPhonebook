@@ -14,7 +14,7 @@ export default class UserBox extends Component {
     async componentDidMount() {
         try {
             const { data } = await axios.get('http://localhost:3002/users')
-            if (data.success) {
+            if (data) {
                 this.setState({
                     users: data.data.map(item => {
                         item.sent = true
@@ -116,6 +116,20 @@ export default class UserBox extends Component {
         }
     }
 
+    searchContact = async (query) => {
+        const params = new URLSearchParams(query)
+        const { data } = await axios.get(`http://localhost:3002/users/${params}`)
+        if (data) {
+            this.setState({
+                users: data.data.map(item => {
+                    item.sent = true
+                    return item
+                })
+            })
+        }
+
+    }
+
     render() {
         return (
             <div>
@@ -124,7 +138,7 @@ export default class UserBox extends Component {
                         {/* CARD FORM START */}
                         <div className='shadow-2xl shadow-slate-300 bg-white/80 rounded-lg'>
                             <div className='container py-16 px-24 space-y-10'>
-                                <UserForm add={this.addContact} />
+                                <UserForm add={this.addContact} search={this.searchContact} />
                             </div>
                         </div>
                     </div>

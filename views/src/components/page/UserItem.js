@@ -40,7 +40,7 @@ export default class UserItem extends Component {
 
                     <div className='flex space-x-4 items-center'>
                         <FontAwesomeIcon icon='phone' />
-                        <input type='text' name='phone' id='phone' value={this.state.phone} onChange={this.handleInputChange} className='px-2 py-1 border border-blue-400/75 rounded-lg w-full' required />
+                        <input type='tel' pattern='[08][0-9]{11}' name='phone' id='phone' value={this.state.phone} onChange={this.handleInputChange} className='px-2 py-1 border border-blue-400/75 rounded-lg w-full' required />
                     </div>
 
                     <div className='flex justify-evenly py-2'>
