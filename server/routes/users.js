@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => {
     if (name && phone) {
       const users = await models.User.findAll({
         where: {
-          [Op.and]: [
+          [Op.or]: [
             { name: name },
             { phone: phone }
           ]
