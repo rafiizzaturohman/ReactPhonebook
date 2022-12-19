@@ -118,7 +118,7 @@ export default class UserBox extends Component {
 
     searchContact = async (query) => {
         const params = new URLSearchParams(query)
-        const { data } = await axios.get(`http://localhost:3002/users/${params}`)
+        const { data } = await axios.get(`http://localhost:3002/users?${params}`)
         if (data) {
             this.setState({
                 users: data.data.map(item => {
@@ -127,7 +127,6 @@ export default class UserBox extends Component {
                 })
             })
         }
-
     }
 
     render() {
