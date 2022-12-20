@@ -47,12 +47,12 @@ export default class UserForm extends Component {
                             <div id='searchForm' className='space-y-8 mt-8'>
                                 <div className='space-x-5 flex justify-evenly items-center'>
                                     <label className='text-lg font-semibold tracking-wide' htmlFor='name'>Name</label>
-                                    <input type='text' id='name' name='name' ref={input => this.params = input} className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' />
+                                    <input type='text' id='name' name='name' className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' />
                                 </div>
 
                                 <div className='space-x-4 flex justify-evenly items-center'>
                                     <label className='text-lg font-semibold tracking-wide' htmlFor='phone'>Phone</label>
-                                    <input type='text' id='phone' name='phone' className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' />
+                                    <input type='text' id='phone' name='phone' ref={state => this.params = state} className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' />
                                 </div>
                             </div>
 
@@ -88,12 +88,12 @@ export default class UserForm extends Component {
                             <div id='searchForm' className='space-y-8 mt-8'>
                                 <div className='space-x-5 flex justify-evenly items-center'>
                                     <label className='text-lg font-semibold tracking-wide' htmlFor='name'>Name</label>
-                                    <input type='text' id='name' name='name' ref={input => this.props.query = input} className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' required />
+                                    <input type='text' id='name' name='name' className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' />
                                 </div>
 
                                 <div className='space-x-4 flex justify-evenly items-center'>
                                     <label className='text-lg font-semibold tracking-wide' htmlFor='phone'>Phone</label>
-                                    <input type='text' id='phone' name='phone' className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' required />
+                                    <input type='text' id='phone' name='phone' ref={state => this.params = state} className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' />
                                 </div>
                             </div>
 

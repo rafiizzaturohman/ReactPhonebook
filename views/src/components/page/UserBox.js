@@ -118,7 +118,6 @@ export default class UserBox extends Component {
 
     searchContact = async (query) => {
         try {
-            console.log(query)
             const { data } = await axios.get(`http://localhost:3002/users`, { params: { name: query } })
             if (data) {
                 this.setState({
