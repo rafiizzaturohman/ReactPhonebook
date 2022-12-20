@@ -74,7 +74,6 @@ router.get('/', async (req, res, next) => {
         ]
       })
 
-      console.log('asu', users)
       res.json(new Response(users))
     }
   } catch (error) {

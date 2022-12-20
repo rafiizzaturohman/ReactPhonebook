@@ -63,7 +63,7 @@ export default class UserBox extends Component {
             }))
         }
     }
-
+    k
     resendContact = async (id, name, phone) => {
         try {
             const { data } = await axios.post(`http://localhost:3002/users`, { name, phone })
@@ -117,15 +117,19 @@ export default class UserBox extends Component {
     }
 
     searchContact = async (query) => {
-        const params = new URLSearchParams(query)
-        const { data } = await axios.get(`http://localhost:3002/users?${params}`)
-        if (data) {
-            this.setState({
-                users: data.data.map(item => {
-                    item.sent = true
-                    return item
+        try {
+            console.log(query)
+            const { data } = await axios.get(`http://localhost:3002/users`, { params: { name: query } })
+            if (data) {
+                this.setState({
+                    users: data.data.map(item => {
+                        item.sent = true
+                        return item
+                    })
                 })
-            })
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
 

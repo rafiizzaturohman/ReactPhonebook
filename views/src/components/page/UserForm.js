@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Component } from 'react';
-import UserSearch from './UserSearch';
 
 export default class UserForm extends Component {
     constructor(props) {
@@ -28,13 +27,39 @@ export default class UserForm extends Component {
         this.setState({ name: '', phone: '' })
     }
 
+    handleSearch = (event) => {
+        event.preventDefault()
+        this.props.search(this.params.value)
+        this.setState({ name: '', phone: '' })
+    }
+
     render() {
         if (this.state.addCond !== true) {
             return (
                 <div>
                     {/* SEARCH START */}
                     <div className='container'>
-                        <UserSearch search={this.props.search} />
+                        <div className='bg-blue-500 rounded-lg px-4 py-1'>
+                            <h1 className=' text-lg text-white font-bold'>Search Contact</h1>
+                        </div>
+
+                        <form onSubmit={this.handleSearch} className=''>
+                            <div id='searchForm' className='space-y-8 mt-8'>
+                                <div className='space-x-5 flex justify-evenly items-center'>
+                                    <label className='text-lg font-semibold tracking-wide' htmlFor='name'>Name</label>
+                                    <input type='text' id='name' name='name' ref={input => this.params = input} className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' />
+                                </div>
+
+                                <div className='space-x-4 flex justify-evenly items-center'>
+                                    <label className='text-lg font-semibold tracking-wide' htmlFor='phone'>Phone</label>
+                                    <input type='text' id='phone' name='phone' className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' />
+                                </div>
+                            </div>
+
+                            <div>
+                                <button type="submit" id="submit">Search</button>
+                            </div>
+                        </form>
                     </div>
                     {/* SEARCH END */}
 
@@ -55,7 +80,27 @@ export default class UserForm extends Component {
                 <div>
                     {/* SEARCH START */}
                     <div className='container'>
-                        <UserSearch />
+                        <div className='bg-blue-500 rounded-lg px-4 py-1'>
+                            <h1 className=' text-lg text-white font-bold'>Search Contact</h1>
+                        </div>
+
+                        <form onSubmit={this.handleSearch} className=''>
+                            <div id='searchForm' className='space-y-8 mt-8'>
+                                <div className='space-x-5 flex justify-evenly items-center'>
+                                    <label className='text-lg font-semibold tracking-wide' htmlFor='name'>Name</label>
+                                    <input type='text' id='name' name='name' ref={input => this.props.query = input} className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' required />
+                                </div>
+
+                                <div className='space-x-4 flex justify-evenly items-center'>
+                                    <label className='text-lg font-semibold tracking-wide' htmlFor='phone'>Phone</label>
+                                    <input type='text' id='phone' name='phone' className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' required />
+                                </div>
+                            </div>
+
+                            <div>
+                                <button type="submit" id="submit">Search</button>
+                            </div>
+                        </form>
                     </div>
                     {/* SEARCH END */}
 
