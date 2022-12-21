@@ -118,7 +118,6 @@ export default class UserBox extends Component {
 
     searchContact = async (query) => {
         try {
-            console.log('Query', query)
             const { data } = await axios.get(`http://localhost:3002/users`, { params: { name: query } })
             if (data) {
                 this.setState({
@@ -137,12 +136,10 @@ export default class UserBox extends Component {
         return (
             <div>
                 <div className='grid gap-8 my-28 mx-20 md:grid-cols-none xl:grid-cols-2'>
-                    <div>
-                        {/* CARD FORM START */}
-                        <div className='shadow-2xl shadow-slate-300 bg-white/80 rounded-lg'>
-                            <div className='container py-16 px-24 space-y-10'>
-                                <UserForm add={this.addContact} search={this.searchContact} />
-                            </div>
+                    {/* CARD FORM START */}
+                    <div className='shadow-2xl shadow-slate-300 bg-white/80 rounded-lg'>
+                        <div className='container py-16 px-24 space-y-10'>
+                            <UserForm add={this.addContact} search={this.searchContact} />
                         </div>
                     </div>
                     {/* CARD FORM END */}

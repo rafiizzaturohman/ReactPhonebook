@@ -50,10 +50,10 @@ export default class UserForm extends Component {
                                     <input type='text' id='name' name='name' ref={state => this.params = state} className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' />
                                 </div>
 
-                                {/* <div className='space-x-4 flex justify-evenly items-center'>
+                                <div className='space-x-4 flex justify-evenly items-center'>
                                     <label className='text-lg font-semibold tracking-wide' htmlFor='phone'>Phone</label>
                                     <input type='text' id='phone' name='phone' className='text-lg border-2 border-blue-200 rounded-lg px-4 py-2 w-full' />
-                                </div> */}
+                                </div>
                             </div>
 
                             <div>
@@ -132,7 +132,7 @@ export default class UserForm extends Component {
                                         <p>Add</p>
                                     </button>
 
-                                    <button type='button' onClick={() => this.setState({ addCond: false })} className='transition flex text-white bg-amber-500 hover:bg-amber-600 hover:delay-150 rounded-lg font-semibold items-center space-x-2 pr-3'>
+                                    <button type='button' onClick={() => this.setState({ addCond: false, name: '', phone: '' })} className='transition flex text-white bg-amber-500 hover:bg-amber-600 hover:delay-150 rounded-lg font-semibold items-center space-x-2 pr-3'>
                                         <div className='bg-amber-600 px-2 py-1 rounded-lg'>
                                             <FontAwesomeIcon icon='ban' />
                                         </div>

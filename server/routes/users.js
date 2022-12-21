@@ -35,7 +35,7 @@ router.get('/', async (req, res, next) => {
     } else if (name) {
       const users = await models.User.findAll({
         where: {
-          [Op]: [
+          [Op.and]: [
             {
               name: {
                 [Op.iLike]: `%${name}%`
@@ -52,7 +52,7 @@ router.get('/', async (req, res, next) => {
     } else if (phone) {
       const users = await models.User.findAll({
         where: {
-          [Op]: [
+          [Op.and]: [
             {
               phone: {
                 [Op.iLike]: `%${phone}%`
