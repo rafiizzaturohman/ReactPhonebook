@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import UserForm from './UserForm';
 import UserList from './UserList';
 import axios from 'axios';
@@ -6,25 +6,42 @@ import axios from 'axios';
 export default class UserBox extends Component {
     constructor(props) {
         super(props)
+        this.params = {
+            page: 1,
+            name: '',
+            phone: ''
+        }
         this.state = {
             users: []
         }
     }
 
     async componentDidMount() {
-        try {
-            const { data } = await axios.get('http://localhost:3002/users')
+        this.loadUser()
+    }
 
-            if (data.success) {
-                this.setState({
-                    users: data.data.map(item => {
-                        item.sent = true
-                        return item
-                    })
-                })
-            }
+    loadUser = async () => {
+        try {
+            const { data } = await axios.get('http://localhost:3002/users', { params: this.params })
+            this.setState(state => ({
+                users: [...(this.params.page === 1 ? [] : state.users), ...data.data.users.map(item => {
+                    item.sent = true
+                    return item
+                })]
+            }))
+            this.params.pages = data.data.pages
         } catch (error) {
             console.log(error)
+        }
+    }
+
+    loadMore = () => {
+        if (this.params.page <= this.params.pages) {
+            this.params = ({
+                ...this.params,
+                page: this.params.page + 1
+            })
+            this.loadUser()
         }
     }
 
@@ -119,15 +136,8 @@ export default class UserBox extends Component {
 
     searchContact = async (name, phone) => {
         try {
-            const { data } = await axios.get(`http://localhost:3002/users`, { params: { name, phone } })
-            if (data.success) {
-                this.setState({
-                    users: data.data.map(item => {
-                        item.sent = true
-                        return item
-                    })
-                })
-            }
+            this.params = { ...this.params, name, phone, page: 1 }
+            this.loadUser()
         } catch (error) {
             console.log(error)
         }
@@ -154,8 +164,8 @@ export default class UserBox extends Component {
                                 <h1 className='text-3xl text-white font-bold tracking-wide'>Phonebook App</h1>
                             </div>
 
-                            <div className='container py-4 px-2 mt-8 max-h-screen overflow-y-auto h-107'>
-                                <UserList data={this.state.users} updateContact={this.updateContact} removeContact={this.deleteContact} resendContact={this.resendContact} />
+                            <div className='container mt-8'>
+                                <UserList data={this.state.users} updateContact={this.updateContact} removeContact={this.deleteContact} resendContact={this.resendContact} loadMore={this.loadMore} />
                             </div>
                         </div>
                     </div>

@@ -7,10 +7,20 @@ const { Op } = require('sequelize')
 /* GET users listing. */
 router.get('/', async (req, res, next) => {
   try {
-    const { name, phone } = req.query
+    const { page, name, phone } = req.query
+
+    console.log(req.query)
+
+    const limit = 9
+    const offset = (page - 1) * limit
+
+    const total = await models.User.count()
+    const pages = Math.ceil(total / limit)
 
     if (name && phone) {
       const users = await models.User.findAll({
+        limit,
+        offset,
         where: {
           [Op.or]: [
             {
@@ -30,10 +40,12 @@ router.get('/', async (req, res, next) => {
         ]
       })
 
-      res.json(new Response(users))
+      res.json(new Response({ users, page: Number(page), pages }))
 
     } else if (name) {
       const users = await models.User.findAll({
+        limit,
+        offset,
         where: {
           [Op.and]: [
             {
@@ -48,9 +60,11 @@ router.get('/', async (req, res, next) => {
         ]
       })
 
-      res.json(new Response(users))
+      res.json(new Response({ users, page: Number(page), pages }))
     } else if (phone) {
       const users = await models.User.findAll({
+        limit,
+        offset,
         where: {
           [Op.and]: [
             {
@@ -65,16 +79,18 @@ router.get('/', async (req, res, next) => {
         ]
       })
 
-      res.json(new Response(users))
+      res.json(new Response({ users, page: Number(page), pages }))
 
     } else {
       const users = await models.User.findAll({
+        limit,
+        offset,
         order: [
           ['name', 'ASC']
         ]
       })
 
-      res.json(new Response(users))
+      res.json(new Response({ users, page: Number(page), pages }))
     }
   } catch (error) {
     console.log(error)
