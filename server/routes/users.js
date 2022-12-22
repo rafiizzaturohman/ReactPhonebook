@@ -9,8 +9,6 @@ router.get('/', async (req, res, next) => {
   try {
     const { page, name, phone } = req.query
 
-    console.log(req.query)
-
     const limit = 9
     const offset = (page - 1) * limit
 
