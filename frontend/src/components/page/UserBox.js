@@ -154,7 +154,7 @@ export default class UserBox extends Component {
                                 <h1 className='text-3xl text-white font-bold tracking-wide'>Phonebook App</h1>
                             </div>
 
-                            <div className='container py-6 px-2 mt-8 max-h-screen overflow-y-scroll h-107'>
+                            <div className='container py-4 px-2 mt-8 max-h-screen overflow-y-auto h-107'>
                                 <UserList data={this.state.users} updateContact={this.updateContact} removeContact={this.deleteContact} resendContact={this.resendContact} />
                             </div>
                         </div>
