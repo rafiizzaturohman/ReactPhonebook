@@ -14,7 +14,8 @@ export default class UserBox extends Component {
     async componentDidMount() {
         try {
             const { data } = await axios.get('http://localhost:3002/users')
-            if (data) {
+
+            if (data.success) {
                 this.setState({
                     users: data.data.map(item => {
                         item.sent = true
@@ -63,7 +64,7 @@ export default class UserBox extends Component {
             }))
         }
     }
-    k
+
     resendContact = async (id, name, phone) => {
         try {
             const { data } = await axios.post(`http://localhost:3002/users`, { name, phone })
@@ -116,10 +117,10 @@ export default class UserBox extends Component {
         }
     }
 
-    searchContact = async (query) => {
+    searchContact = async (name, phone) => {
         try {
-            const { data } = await axios.get(`http://localhost:3002/users`, { params: { name: query } })
-            if (data) {
+            const { data } = await axios.get(`http://localhost:3002/users`, { params: { name, phone } })
+            if (data.success) {
                 this.setState({
                     users: data.data.map(item => {
                         item.sent = true
@@ -137,21 +138,25 @@ export default class UserBox extends Component {
             <div>
                 <div className='grid gap-8 my-28 mx-20 md:grid-cols-none xl:grid-cols-2'>
                     {/* CARD FORM START */}
-                    <div className='shadow-2xl shadow-slate-300 bg-white/80 rounded-lg'>
-                        <div className='container py-16 px-24 space-y-10'>
-                            <UserForm add={this.addContact} search={this.searchContact} />
+                    <div className='sticky'>
+                        <div className='shadow-2xl shadow-slate-300 bg-white/80 rounded-lg'>
+                            <div className='container py-16 px-24 space-y-10'>
+                                <UserForm add={this.addContact} search={this.searchContact} />
+                            </div>
                         </div>
                     </div>
                     {/* CARD FORM END */}
 
                     {/* CARD LIST START */}
-                    <div className=''>
-                        <div className='bg-gradient-to-tr from-blue-700 to-blue-500 px-8 py-1 rounded-md shadow-md'>
-                            <h1 className='text-3xl text-white font-bold tracking-wide'>Phonebook App</h1>
-                        </div>
+                    <div>
+                        <div className=''>
+                            <div className='bg-gradient-to-tr from-blue-700 to-blue-500 px-8 py-1 rounded-md shadow-md'>
+                                <h1 className='text-3xl text-white font-bold tracking-wide'>Phonebook App</h1>
+                            </div>
 
-                        <div className='container py-6 px-2 mt-8 overscroll-y-contain max-h-screen'>
-                            <UserList data={this.state.users} updateContact={this.updateContact} removeContact={this.deleteContact} resendContact={this.resendContact} />
+                            <div className='container py-6 px-2 mt-8 max-h-screen overflow-y-scroll h-107'>
+                                <UserList data={this.state.users} updateContact={this.updateContact} removeContact={this.deleteContact} resendContact={this.resendContact} />
+                            </div>
                         </div>
                     </div>
                     {/* CARD LIST END */}
